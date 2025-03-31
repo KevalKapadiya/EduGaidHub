@@ -1,0 +1,227 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="EduGaidHub.Site1" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>EduGaidHub</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+    <style>
+        /* General Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+    background: #f4f4f4; /* Light gray background */
+    padding-top: 70px;
+}
+
+
+        /* Main Content Box */
+        .content-box {
+            background: white;
+            padding: 20px;
+            margin: 20px auto;
+            width: 90%;
+            max-width: 1100px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #667eea;
+            border-right: 5px solid #764ba2;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            background: linear-gradient(to right, #667eea, #764ba2);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            font-size: 18px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar a, .dropdown-btn {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .navbar a:hover, .dropdown-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Dropdown */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 200px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            overflow: hidden;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .dropdown-content a {
+            color: #333;
+            padding: 12px 16px;
+            display: block;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .dropdown-content a:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-5px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Search Box */
+        .search-box {
+            padding: 10px;
+            border-radius: 20px;
+            border: none;
+            font-size: 16px;
+            width: 250px;
+            outline: none;
+            transition: 0.3s;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-box:focus {
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Buttons */
+        .btn {
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #5a67d8;
+        }
+
+        /* Responsive Navbar */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .search-box {
+                margin-top: 10px;
+                width: 90%;
+            }
+
+            .dropdown-content {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Footer */
+       .footer {
+        background: linear-gradient(to right, #667eea, #764ba2);
+        color: white;
+        text-align: center;
+        padding: 15px;
+        font-size: 16px;
+        box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+
+        <!-- Navbar -->
+        <div class="navbar">
+            <div>
+                <a href="Home.aspx">Home</a>
+
+                <!-- Courses Dropdown -->
+                <div class="dropdown">
+                    <span class="dropdown-btn">Courses ▾</span>
+                    <div class="dropdown-content">
+                        <a href="CourseDetails.aspx?course=Msc Data Science">Data Science</a>
+                        <a href="CourseDetails.aspx?course=Msc cyber security">Cyber Security</a>
+                        <a href="CourseDetails.aspx?course=BCA">BCA</a>
+                        <a href="CourseDetails.aspx?course=BBA">BBA</a>
+                        <a href="CourseDetails.aspx?course=MBA">MBA</a>
+                        <a href="CourseDetails.aspx?course=IT">IT</a>
+                    </div>
+                </div>
+
+                <a href="ContactUs.aspx">Contact Us</a>
+               
+            </div>
+            <div>
+                <input type="text" id="txtSearch" class="search-box" placeholder="Search Courses..." />
+                <a href='<%= ResolveUrl("~/AdminLogin.aspx") %>' class="btn">Admin</a>
+                <a href='<%= ResolveUrl("~/Logout.aspx") %>' class="btn">Logout</a>
+            </div>
+        </div>
+
+        <!-- Content Box -->
+        <div class="content-box">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server">
+</asp:ContentPlaceHolder>
+
+        
+
+            </asp:ContentPlaceHolder>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>&copy; 2025 EduGaidHub. All Rights Reserved.</p>
+        </div>
+
+    </form>
+</body>
+</html>
